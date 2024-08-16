@@ -1,8 +1,9 @@
 "use client"
 
-
 import styled from "@emotion/styled";
-import {theme} from "@/styles/theme";
+import Image from "next/image";
+import veganFood from "../../public/image/vegan_food.svg"
+import SearchBar from "@/components/SearchBar";
 
 
 export default function Main() {
@@ -10,8 +11,12 @@ export default function Main() {
 
     return(
     <Wrapper>
-    <Title>Vegan <br/>
-        <Recipe>{``} Recipe </Recipe></Title>
+    <Image src={veganFood} alt="vegan_food" width={400} height={400}  style={{ borderRadius: '50%' }} />
+
+        <CenterWrapper>
+        <Title>Discover delicious vegan recipes</Title>
+        <SearchBar/>
+        </CenterWrapper>
     </Wrapper>
 )
 }
@@ -21,19 +26,26 @@ export default function Main() {
 const Wrapper = styled.div`
  
     display:flex;
-    justify-content: flex-end;
-    margin-top:100px;
-    margin-right:180px;
+    justify-content: center;
+    align-items:flex-start;
+    padding:100px 0 15px;
+    gap:30px;
+    background:beige;
+    
 
-`; 
+`;
 
 const Title = styled.div`
     font-weight:bold;
-    font-size:50px;
-    line-height:70px;
-    color: ${theme.colors.black};
+    font-size:40px;
+    color:#00243E;
 `;
 
-const Recipe = styled.div`
-    margin-left:30px;
-`
+const CenterWrapper = styled.div`
+    height:200px;
+display:flex;
+flex-direction:column;
+align-items:center;
+    justify-content: space-between;
+`;
+
