@@ -1,8 +1,6 @@
 "use client"
 
-
 import styled from "@emotion/styled";
-import {theme} from "@/styles/theme";
 import Image from "next/image";
 import veganFood from "../../public/image/vegan_food.svg"
 import SearchBar from "@/components/SearchBar";
