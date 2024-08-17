@@ -4,6 +4,7 @@
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '../styles/theme';
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {RecoilRoot} from "recoil";
 
 
 export default function ClientLayout({
@@ -16,10 +17,12 @@ export default function ClientLayout({
 const queryClient = new QueryClient();
 
     return (
+        <RecoilRoot>
         <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
             {children}
         </ThemeProvider>
         </QueryClientProvider>
+        </RecoilRoot>
     );
 }
