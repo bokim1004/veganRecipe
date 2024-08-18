@@ -1,14 +1,8 @@
 import axios from "axios";
 
-export interface RecipeData {
-    results: {
-        id: number;
-        title: string;
-        // 추가 필드들
-    }[];
-}
 
- export const fetchSearchData = async ():Promise<any> => {
+
+ export const fetchFoodData = async ():Promise<any> => {
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
      try {

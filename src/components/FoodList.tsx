@@ -1,7 +1,11 @@
 import styled from "@emotion/styled";
-import {useRecoilValue} from "recoil";
-import {foodListDataState} from "@/atoms/atoms";
+import {useRecoilValue, useSetRecoilState} from "recoil";
+import {foodListDataState, recipeDataState, selectedFoodIdState} from "@/atoms/atoms";
 import Image from "next/image";
+import {fetchRecipeAPI} from "@/utils/fetchRecipeAPI";
+import {useQuery} from "@tanstack/react-query";
+import {Simulate} from "react-dom/test-utils";
+import select = Simulate.select;
 
 interface DataType {
     id:number;
@@ -13,6 +17,7 @@ interface DataType {
 export default function FoodList () {
 
     const foodDataList = useRecoilValue(foodListDataState);
+    const setSelectedFoodId = useSetRecoilState(selectedFoodIdState);
 
     const excludeIndex=[3,6];
     const filterFoodData = foodDataList?.filter((_,index) => !excludeIndex.includes(index));
@@ -20,7 +25,23 @@ export default function FoodList () {
 
 
 
-    console.log("foodDataList",foodDataList);
+
+
+    const selectedFoodId = useRecoilValue(selectedFoodIdState);
+
+    const { data:recipeData,error,refetch } = useQuery({
+        queryKey: ['recipe',selectedFoodId], queryFn: ()=> fetchRecipeAPI(selectedFoodId), enabled: selectedFoodId !== null
+    });
+
+    const setRecipeData = useSetRecoilState(recipeDataState);
+    setRecipeData(recipeData);
+
+    const onRecipeClick =(id: number)=>{
+        setSelectedFoodId(id);
+        refetch();
+    }
+
+
     return(
         <>
         <List>FOOD LISTS</List>
@@ -28,7 +49,7 @@ export default function FoodList () {
                 {
                     filterFoodData?.map((data :DataType)=> {
                         return(
-                              <InsideWrapper key={data?.id}>
+                              <InsideWrapper key={data?.id}  onClick={()=>onRecipeClick(data?.id)}>
                                 <Image src={data?.image} alt={'image'} width={300} height={250}/>
                                   <FoodTitle>{data?.title}</FoodTitle>
                               </InsideWrapper>

@@ -3,11 +3,24 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
 import veganFood from "../../public/image/vegan_food.svg"
-import SearchBar from "@/components/SearchBar";
+import RecipeCTA from "@/components/RecipeCTA";
 import FoodList from "@/components/FoodList";
+import {useQuery} from "@tanstack/react-query";
+import {fetchFoodData} from "@/utils/fetchFoodApi";
+import {useRecoilValue, useSetRecoilState} from "recoil";
+import {foodListDataState, recipeDataState, selectedFoodIdState} from "@/atoms/atoms";
+import {fetchRecipeAPI} from "@/utils/fetchRecipeAPI";
 
 
 export default function Main() {
+    const { data:foodListData } = useQuery({
+        queryKey: ['foodList'],queryFn: fetchFoodData
+    });
+    const setFoodData = useSetRecoilState(foodListDataState);
+    setFoodData(foodListData?.results);
+
+    const foodList= useRecoilValue(foodListDataState);
+
 
 
     return(
@@ -17,7 +30,7 @@ export default function Main() {
     <Image src={veganFood} alt="vegan_food" width={400} height={400}  style={{ borderRadius: '50%' }} />
         <CenterWrapper>
         <Title>Discover delicious vegan recipes</Title>
-        <SearchBar/>
+        <RecipeCTA/>
         </CenterWrapper>
         </Center>
     </Wrapper>
@@ -56,10 +69,10 @@ const Title = styled.div`
 `;
 
 const CenterWrapper = styled.div`
-    height:200px;
+   
 display:flex;
 flex-direction:column;
 align-items:center;
-    justify-content: space-between;
+    justify-content: space-around;
 `;
 
