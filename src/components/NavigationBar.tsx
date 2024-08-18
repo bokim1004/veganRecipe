@@ -1,5 +1,5 @@
 "use client"
-
+import Link from "next/link";
 import styled from "@emotion/styled";
 
 
@@ -8,8 +8,8 @@ export default function NavigationBar() {
         <Wrapper>
             <Title>All of the Delicious Vegan Recipes</Title>
             <NavBox>
-                <Box>Home</Box>
-                <Box>Recipe</Box>
+                <Link href="/" passHref style={{ textDecoration: "none", color:"#02a58f"}}> Home</Link>
+                <Link href="/Recipes" passHref style={{ textDecoration: "none", color:"#02a58f"}}> Recipe</Link>
             </NavBox>
             <BottomDiv/>
         </Wrapper>
@@ -26,6 +26,7 @@ display:flex;
     width:100%;
     height:100px;
     background:white;
+
  
 `
 
@@ -35,12 +36,10 @@ const NavBox = styled.div`
     gap:50px;
     font-size:18px;
     color:#02a58f;
-
+    
+    text-decoration: none
 `
 
-const Box = styled.div`
-    
-`;
 
 const BottomDiv = styled.div`
   position:absolute;
