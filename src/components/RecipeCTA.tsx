@@ -2,15 +2,17 @@
 
 import React from "react";
 import styled from "@emotion/styled";
+import Link from "next/link";
 
 
 
 const RecipeCTA= () => {
 
   return(
+
     <Wrapper>
         <Text>What do you want to eat?</Text>
-         <ButtonBox>Discover Recipes</ButtonBox>
+         <ButtonBox> <Link href="/Recipes">Discover Recipes</Link></ButtonBox>
     </Wrapper>
 )
 }

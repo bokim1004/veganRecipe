@@ -7,9 +7,9 @@ import RecipeCTA from "@/components/RecipeCTA";
 import FoodList from "@/components/FoodList";
 import {useQuery} from "@tanstack/react-query";
 import {fetchFoodData} from "@/utils/fetchFoodApi";
-import {useRecoilValue, useSetRecoilState} from "recoil";
-import {foodListDataState, recipeDataState, selectedFoodIdState} from "@/atoms/atoms";
-import {fetchRecipeAPI} from "@/utils/fetchRecipeAPI";
+import { useSetRecoilState} from "recoil";
+import {foodListDataState} from "@/atoms/atoms";
+
 
 
 export default function Main() {
@@ -19,7 +19,6 @@ export default function Main() {
     const setFoodData = useSetRecoilState(foodListDataState);
     setFoodData(foodListData?.results);
 
-    const foodList= useRecoilValue(foodListDataState);
 
 
 

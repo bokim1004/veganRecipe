@@ -1,13 +1,17 @@
+"use client"
+
 import styled from "@emotion/styled";
 import NavigationBar from "@/components/NavigationBar";
+import RecipePage from "@/components/RecipePage";
+
 
 
 const Recipes = ()=>{
+
     return(
         <div>
         <NavigationBar/>
-        <Wrapper>
-        </Wrapper>
+       <RecipePage/>
         </div>
     )
 }
