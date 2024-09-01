@@ -6,8 +6,7 @@ import {fetchRecipeAPI} from "@/utils/fetchRecipeAPI";
 import {useQuery} from "@tanstack/react-query";
 import {useEffect} from "react";
 
-
-
+import {useRouter} from "next/navigation";
 
 interface DataType {
     id:number;
@@ -17,7 +16,7 @@ interface DataType {
 }
 
 export default function FoodList () {
-
+    const router = useRouter();
     const foodDataList = useRecoilValue(foodListDataState);
     const [selectFoodId,setSelectFoodId]=useRecoilState<number|null>(selectedFoodIdState);
 
@@ -25,37 +24,16 @@ export default function FoodList () {
     const filterFoodData = foodDataList?.filter((_,index) => !excludeIndex.includes(index));
 
 
-    console.log("selectFoodId",selectFoodId)
-
-    const { data:recipeData,error,refetch } = useQuery({
-        //selectFoodId가 null, undefined, 0 등의 값이면 false
-        queryKey: ['recipe',selectFoodId], queryFn: ()=> fetchRecipeAPI(selectFoodId),enabled: !!selectFoodId,
-    });
-console.log("recipeData",recipeData);
-    const setRecipeData = useSetRecoilState(recipeDataState);
 
 
-    useEffect(() => {
+    const onRecipeClick = (id: number | null)=>{
 
-        if (recipeData) {
-            console.log("여기")
-            setRecipeData(recipeData); // 가져온 데이터를 Recoil 상태로 설정
-        }
-    }, [recipeData,setRecipeData]);
+            setSelectFoodId(id);
+        router.push('/Recipes');
 
 
-
-    const onRecipeClick = async(id: number | null)=>{
-        console.log("id",id)
-        setSelectFoodId(id);
-        window.location.href = `/Recipes`;
-        if(id !== null) {
-            await refetch();
-        }
 
     }
-
-
 
 
     return(
@@ -110,7 +88,7 @@ const InsideWrapper = styled.div`
     flex-direction:column;
     justify-content: center;
     align-items: center;
-    border:1px solid red;
+  
 
 `
 

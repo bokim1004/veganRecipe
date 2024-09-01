@@ -10,8 +10,8 @@ const Recipes = ()=>{
 
     return(
         <div>
-        <NavigationBar/>
-       <RecipePage/>
+            <NavigationBar/>
+            <RecipePage/>
         </div>
     )
 }
