@@ -22,13 +22,14 @@ export default function Main() {
 
 
 
+
     return(
         <>
     <Wrapper>
         <Center>
     <Image src={veganFood} alt="vegan_food" width={400} height={400}  style={{ borderRadius: '50%' }} />
         <CenterWrapper>
-        <Title>Discover delicious vegan recipes</Title>
+        <Title>Find delicious vegan recipes</Title>
         <RecipeCTA/>
         </CenterWrapper>
         </Center>

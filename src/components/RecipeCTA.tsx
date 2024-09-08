@@ -12,7 +12,7 @@ const RecipeCTA= () => {
 
     <Wrapper>
         <Text>What do you want to eat?</Text>
-         <ButtonBox> <Link href="/Recipes">Discover Recipes</Link></ButtonBox>
+         <ButtonBox> <Link href="/Recipes">Find Recipes</Link></ButtonBox>
     </Wrapper>
 )
 }

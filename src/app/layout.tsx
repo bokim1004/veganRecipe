@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
 
 
-console.log("childeren",children)
+
   return (
 
 
