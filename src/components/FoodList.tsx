@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
-import {useRecoilValue, useSetRecoilState} from "recoil";
+import {useRecoilValue, useSetRecoilState,useRecoilState} from "recoil";
 import {foodListDataState, recipeDataState, selectedFoodIdState} from "@/atoms/atoms";
 import Image from "next/image";
 import {fetchRecipeAPI} from "@/utils/fetchRecipeAPI";
 import {useQuery} from "@tanstack/react-query";
-import {Simulate} from "react-dom/test-utils";
-import select = Simulate.select;
+import {useEffect} from "react";
+
+import {useRouter} from "next/navigation";
 
 interface DataType {
     id:number;
@@ -15,9 +16,9 @@ interface DataType {
 }
 
 export default function FoodList () {
-
+    const router = useRouter();
     const foodDataList = useRecoilValue(foodListDataState);
-    const setSelectedFoodId = useSetRecoilState(selectedFoodIdState);
+    const [selectFoodId,setSelectFoodId]=useRecoilState<number|null>(selectedFoodIdState);
 
     const excludeIndex=[3,6];
     const filterFoodData = foodDataList?.filter((_,index) => !excludeIndex.includes(index));
@@ -25,20 +26,13 @@ export default function FoodList () {
 
 
 
+    const onRecipeClick = (id: number | null)=>{
+
+            setSelectFoodId(id);
+        router.push('/Recipes');
 
 
-    const selectedFoodId = useRecoilValue(selectedFoodIdState);
 
-    const { data:recipeData,error,refetch } = useQuery({
-        queryKey: ['recipe',selectedFoodId], queryFn: ()=> fetchRecipeAPI(selectedFoodId), enabled: selectedFoodId !== null
-    });
-
-    const setRecipeData = useSetRecoilState(recipeDataState);
-    setRecipeData(recipeData);
-
-    const onRecipeClick =(id: number)=>{
-        setSelectedFoodId(id);
-        refetch();
     }
 
 
@@ -94,6 +88,7 @@ const InsideWrapper = styled.div`
     flex-direction:column;
     justify-content: center;
     align-items: center;
+  
 
 `
 

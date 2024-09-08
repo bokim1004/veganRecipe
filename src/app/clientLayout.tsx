@@ -14,15 +14,19 @@ export default function ClientLayout({
 }) {
 
 
+    console.log("ClientLayout", children);
+
 const queryClient = new QueryClient();
 
     return (
-        <RecoilRoot>
+
         <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
+            <RecoilRoot>
             {children}
+            </RecoilRoot>
         </ThemeProvider>
         </QueryClientProvider>
-        </RecoilRoot>
+
     );
 }
